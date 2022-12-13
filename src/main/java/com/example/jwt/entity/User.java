@@ -33,7 +33,7 @@ public class User implements UserDetails {
 	private String nickname;
 	
 	@Column
-	private String emailString;
+	private String email;
 	
 
 	

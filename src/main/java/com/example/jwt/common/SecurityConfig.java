@@ -34,9 +34,10 @@ public class SecurityConfig {
 	//	csrf라는 방어하겠다는 의미. 이쪽으로 들어오는것은 막겟다.
 		http.csrf().disable();
 		http.httpBasic().disable().authorizeHttpRequests()
-		.antMatchers("/login**", "/web-respirces/**", "/actuator/**").permitAll()
-		.antMatchers("/admit/**").hasRole("ADMIN")
-		.antMatchers("/user/**").hasRole("USER")
+		.antMatchers("/**/*").permitAll()
+//		.antMatchers("/login**", "/web-respirces/**", "/actuator/**").permitAll()
+//		.antMatchers("/admit/**").hasRole("ADMIN")
+//		.antMatchers("/user/**").hasRole("USER")
 		.anyRequest().authenticated();
 		
 	http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
