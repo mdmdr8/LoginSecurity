@@ -32,12 +32,17 @@ public class UserController {
 			HttpServletRequest request){
 		Map<String, String> res = new HashMap<>();
 		User user = (User)customUserDetailsService.loadUserByUsername(id);
-		String accessToken = jwtTokenProvider.createToken(user.getUsername());
-		String refreshToken =jwtTokenProvider.refreshToken(user.getUsername());
-		res.put("userid",user.getUsername() );
-		res.put("accessToken", accessToken);
-		res.put("refreshToken", refreshToken);
-		return new ResponseEntity<Map<String, String>>(res, HttpStatus.OK);
+		
+		if(user!=null && user.getPassword().equals(password)) {
+		
+			String accessToken = jwtTokenProvider.createToken(user.getUsername());
+			String refreshToken =jwtTokenProvider.refreshToken(user.getUsername());
+			res.put("userid",user.getUsername() );
+			res.put("accessToken", accessToken);
+			res.put("refreshToken", refreshToken);
+			return new ResponseEntity<Map<String, String>>(res, HttpStatus.OK);
+		}
+		return new ResponseEntity<Map<String, String>>(HttpStatus.BAD_REQUEST);
 		
 	}
 	

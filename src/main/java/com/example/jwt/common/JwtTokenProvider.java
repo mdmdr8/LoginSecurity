@@ -43,8 +43,8 @@ public class JwtTokenProvider {
 				.setClaims(claims)
 				.setId(userPK)
 				.setIssuedAt(now) //만들어진 시간
-				.setExpiration(new Date(now.getTime())) //만료시간
-//				.setExpiration(new Date(now.getTime()+tokenValidTime)) //만료시간
+//				.setExpiration(new Date(now.getTime())) //만료시간
+				.setExpiration(new Date(now.getTime()+tokenValidTime)) //만료시간
 				.signWith(SignatureAlgorithm.HS256,secretKey) //알고리즘 이용해서 키로 서명
 				.compact();
 	}
